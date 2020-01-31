@@ -1,0 +1,258 @@
+
+let mapleader=" "
+syntax on
+filetype plugin indent on
+
+" 搜索
+"
+set hlsearch
+set incsearch 
+set ignorecase
+set showmatch       " 显示括号匹配
+set matchtime=1
+noremap <LEADER><CR> :nohlsearch<CR>
+hi MatchParen ctermbg=Yellow guibg=lightblue
+
+
+" Bell
+"
+set novisualbell
+set noerrorbells
+
+
+" 界面
+"
+set colorcolumn=82
+set scrolloff=5
+set t_Co=256
+set ruler
+set showcmd
+set wildmenu
+set cursorline
+set laststatus=2
+set number
+
+
+" 缩进
+"
+set autoindent
+set cindent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set smarttab
+
+
+" 字符编码
+"
+set termencoding=utf-8
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936
+set fileencoding=utf-8
+
+
+" 读取、保存、备份
+"
+set autoread
+set autowrite
+set nobackup
+set noswapfile
+
+
+" 鼠标
+"
+set mouse=a
+set selection=exclusive
+set selectmode=mouse,key
+
+
+" 按键映射
+"
+:nnoremap s <Nop>
+:inoremap jk <ESC>
+:inoremap MM <<
+:inoremap ( ()<ESC>i
+:inoremap ) <c-r>=ClosePair(')')<CR>
+:inoremap { {}<ESC>i
+:inoremap {<CR> {<CR>}<ESC>O
+:inoremap } <c-r>=ClosePair('}')<CR>
+:inoremap [ []<ESC>i
+:inoremap ] <c-r>=ClosePair(']')<CR>
+"inoremap <TAB> <c-r>=SkipPair()<CR>
+":inoremap " ""<ESC>i
+":inoremap ' ''<ESC>i
+:map <LEADER>sc :set spell!<CR>   " 拼写检查
+
+
+" 分屏
+"
+map sl :set splitright<CR>:vsplit 
+map sh :set nosplitright<CR>:vsplit 
+map sk :set nosplitbelow<CR>:split 
+map sj :set splitbelow<CR>:split 
+map <LEADER>l <C-w>l
+map <LEADER>h <C-w>h
+map <LEADER>k <C-w>k
+map <LEADER>j <C-w>j
+
+
+" 标签页
+"
+map tn :tabe<CR>
+map tl :+tabnext<CR>
+map th :-tabnext<CR>
+
+
+
+" 其他功能
+"
+set confirm
+set history=1000
+set gdefault      " 行内替换
+set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限  
+set completeopt=longest,menu  "  自动补全
+set clipboard+=unnamed      " 共享剪贴板
+"set magic                   " 设置魔术
+"set backspace=indent,eol,start
+set backspace=2
+set fo=cqrt
+
+
+" 插件
+"
+set rtp+=/home/icrystal/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-airline/vim-airline'
+Plugin 'preservim/nerdtree'
+Plugin 'suan/vim-instant-markdown', { 'for' : 'markdown' }
+Plugin 'godlygeek/tabular' "必要插件，安装在vim-markdown前面
+Plugin 'plasticboy/vim-markdown', { 'for' : 'markdown' }
+Plugin 'mzlogin/vim-markdown-toc', { 'for' : 'markdown' }
+Plugin 'joker1007/vim-markdown-quote-syntax', { 'for' : 'markdown' }
+Plugin 'dhruvasagar/vim-table-mode', { 'for': 'markdown'}
+call vundle#end()
+
+
+" 闭合括号
+"
+function! ClosePair(char)
+    if getline('.')[col('.') - 1] == a:char
+        return "\<Right>"
+    else
+        return a:char
+    endif
+endfunction
+
+
+"设置跳出自动补全的括号
+"
+func SkipPair()
+    if getline('.')[col('.') - 1] == ')' || getline('.')[col('.') - 1] == ']' ||  getline('.')[col('.') - 1] == '"' || getline('.')[col('.') - 1] == "'" || getline('.')[col('.') - 1] == '}'
+        return "\<ESC>la"
+    else
+        return "\t"
+    endif
+endfunc
+
+
+" ====================
+"   YCM 自动补全
+" ====================
+"
+set runtimepath+=/home/icrystal/.vim/bundle/YouCompleteMe
+nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <C-j>  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:syntastic_ignore_files=[".*\.py$"]
+let g:ycm_seed_identifiers_with_syntax = 1        " 语法关键字补全
+let g:ycm_complete_in_comments = 1
+let g:ycm_confirm_extra_conf = 0
+"let g:ycm_key_list_select_completion = ['tab', '<c-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_complete_in_comments = 1      " 在注释输入中也能补全
+let g:ycm_complete_in_strings = 1       "  在字符串输入中也能补全
+let g:ycm_global_ycm_extra_conf='/home/icrystal/.vim/bundle/YouCompleteMe/c++/ycm/.ycm_extra_conf.py'
+let g:ycm_show_diagnostics_ui = 0                           " 禁用语法检查
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" | 
+let g:ycm_min_num_of_chars_for_completion=2	"从第2个键入字符就开始罗列匹配项
+
+
+" ====================
+"   NETDTree   
+" ====================
+" 
+map tt :NERDTreeToggle<CR>
+let NERDTreeMapOpenExpl=""
+let NERDTreeMapUpdir=""
+let NERDTreeMapUpdirKeepOpen="l"
+let NERDTreeMapOpenSplit=""
+let NERDTreeOpenVSplit=""
+let NERDTreeMapActivateNode="i"
+let NERDTreeMapOpenInTab="o"
+let NERDTreeMapPreview=""
+let NERDTreeMapCloseDir="n"
+let NERDTreeMapChangeRoot="y"
+
+
+" =========================
+"   vim-instant-markdown
+" =========================
+"
+let g:instant_markdown_autostart = 0
+let g:instant_markdown_allow_unsafe_content = 0
+let g:instant_markdown_allow_external_content = 1
+let g:instant_markdown_mathjax = 1
+let g:instant_markdown_browser = "firefox --new-window"
+let g:instant_markdown_port = 8888
+let g:instant_markdown_autoscroll = 1
+"let g:instant_markdown_slow = 0
+"let g:instant_markdown_open_to_the_world = 0
+"let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
+"let g:instant_markdown_python = 1
+
+map mdp :InstantMarkdownPreview<CR>
+map mdc :InstantMarkdownStop<CR>
+
+
+" =========================
+"   markdown-quote-syntax
+" =========================
+"
+"let g:markdown_quote_syntax_on_filetypes = ['text']
+
+
+" ====================
+"   vim-table-mode
+" ====================
+"
+map <LEADER>tm :TableModeToggle<CR>
+
+
+" ====================
+"    vim-markdown  
+" ====================
+"
+let g:vim_markdown_math = 1
+let g:vim_markdown_folding_disabled = 1
+func Markdown_Key_Maps()
+    if &filetype == 'markdown'
+        :inoremap ,b ****<ESC><left>i
+        syntax off
+    endif
+endfunc
+call Markdown_Key_Maps()
+
+
+" ====================
+"   
+" ====================
+"
+
+
+" 快捷键
+source ~/.vim/snippets.vim
+
