@@ -42,6 +42,9 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 set smarttab
+autocmd FileType javascript,html,css,xml set shiftwidth=2
+autocmd FileType javascript,html,css,xml set tabstop=2
+autocmd FileType javascript,html,css,xml set softtabstop=2
 
 
 " 字符编码
@@ -71,7 +74,6 @@ set selectmode=mouse,key
 "
 :nnoremap s <Nop>
 :inoremap jk <ESC>
-:inoremap MM <<
 :inoremap ( ()<ESC>i
 :inoremap ) <c-r>=ClosePair(')')<CR>
 :inoremap { {}<ESC>i
@@ -83,6 +85,9 @@ set selectmode=mouse,key
 ":inoremap " ""<ESC>i
 ":inoremap ' ''<ESC>i
 :map <LEADER>sc :set spell!<CR>   " 拼写检查
+:nnoremap SH :ter<space>++rows=8<CR>
+:nnoremap LCC :w<CR>:ter<space>++rows=8<CR>lc c;exit;<CR>
+:nnoremap LCD :set splitright<CR>:vsplit ../description<CR>
 
 
 " 分屏
@@ -117,6 +122,10 @@ set clipboard+=unnamed      " 共享剪贴板
 "set backspace=indent,eol,start
 set backspace=2
 set fo=cqrt
+
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 
 " 插件
