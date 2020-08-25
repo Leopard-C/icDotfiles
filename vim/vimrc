@@ -45,6 +45,8 @@ set smarttab
 autocmd FileType javascript,html,css,xml set shiftwidth=2
 autocmd FileType javascript,html,css,xml set tabstop=2
 autocmd FileType javascript,html,css,xml set softtabstop=2
+" C++ Lambda
+autocmd FileType cpp setlocal cindent cino=j1,(0,ws,Ws
 
 
 " 字符编码
@@ -74,6 +76,11 @@ set selectmode=mouse,key
 "
 :nnoremap s <Nop>
 :inoremap jk <ESC>
+:inoremap JK <ESC>
+:inoremap Jk <ESC>
+:inoremap Inc inc
+:inoremap Inc inc
+:inoremap INc inc
 :inoremap ( ()<ESC>i
 :inoremap ) <c-r>=ClosePair(')')<CR>
 :inoremap { {}<ESC>i

@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
-#export PATH=$HOME/bin:/usr/local/bin:$PATH
-#export PATH=$HOME/bin:/usr/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/icrystal/.oh-my-zsh"
@@ -100,28 +100,76 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
+# Opencv
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
 
-# ssr
+# proxy
 alias ssr='sudo python /usr/local/ssr/shadowsocks/local.py -c /usr/local/ssr/user-config.json'
 alias px='proxychains4'
 
 # directory
 alias shm='cd /dev/shm'
 alias dev='cd /home/icrystal/dev'
+alias devcpp='cd /home/icrystal/dev/cpp'
+alias devjs='cd /home/icrystal/dev/js'
 
 # leetcode
 alias leetcode='source /home/icrystal/dev/shell/leetcode/leetcode.sh'
 alias lc='source /home/icrystal/dev/shell/leetcode/leetcode.sh'
+alias lcc="lc commit"
 
 # vim
 alias vimrc='vim ~/.vimrc'
+alias ycm='vim ~/.vim/bundle/YouCompleteMe/c++/ycm/.ycm_extra_conf.py'
 
 # zsh
 alias zshrc='vim ~/.zshrc'
 alias sourcezshrc='source ~/.zshrc'
 
+# ssh
+#   ali server
+alias aliserver='ssh root@120.76.56.226 -o ServerAliveInterval=60'
+alias ali='ssh root@120.76.56.226 -o ServerAliveInterval=60'
+alias jwc='ssh root@120.79.23.130 -o ServerAliveInterval=60'
+alias misaka='ssh root@120.79.23.130 -o ServerAliveInterval=60'
+#   pi4
+alias pi4='ssh pi@192.168.1.102 -o ServerAliveInterval=60'
+alias pi='ssh pi@192.168.1.102 -o ServerAliveInterval=60'
+#   vultr
+alias vultr='ssh root@149.28.29.66 -o ServerAliveInterval=60'
+#   sql
+alias sql='ssh root@120.78.180.234 -o ServerAliveInterval=60'
+
+
 # qshell
 if [ $commands[qshell] ]; then
   source <(qshell completion zsh)
 fi
+
+# icpp
+alias icpp='~/dev/shell/icpp/icpp.sh'
+
+# today
+alias today='~/dev/shell/git/commit.sh'
+
+# apache
+alias apache='sudo /usr/local/apache/bin/apachectl'
+
+# others
+alias cls=clear
+alias kk=ll
+[[ -s "$HOME/.xmake/profile" ]] && source "$HOME/.xmake/profile" # load xmake profile
+
+# xmake
+alias xmk='cd /home/icrystal/dev/cpp/BilibiliUsers && xmake; cd -'
+alias run='cd /home/icrystal/dev/cpp/BilibiliUsers && ./bilibili_users; cd -'
+alias cfg='vim /home/icrystal/dev/cpp/BilibiliUsers/config/app.json'
+
+# tomcat
+alias tomcat='sudo /usr/local/tomcat/bin/tomcat.sh'
+
+# music comment editor
+alias music='cd /home/icrystal/dev/cpp/MusicCommentEditor/build/Release; ./MusicCommentEditor'
+
+export PATH="$PATH:/usr/local/nodejs/bin"
 
