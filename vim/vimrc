@@ -95,6 +95,7 @@ set selectmode=mouse,key
 :nnoremap SH :ter<space>++rows=8<CR>
 :nnoremap LCC :w<CR>:ter<space>++rows=8<CR>lc c;exit;<CR>
 :nnoremap LCD :set splitright<CR>:vsplit ../description<CR>
+:nnoremap YY :set formatoptions-=ro<CR>
 
 
 " 分屏
